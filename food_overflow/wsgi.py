@@ -1,5 +1,5 @@
 """
-WSGI config for shine project.
+WSGI config for food_overflow project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

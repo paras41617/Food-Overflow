@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Food Providers Near You</h1>
+  <div id="map"></div>
+  <ul id="providers-list">
+  </ul>
+{% endblock %}
+
+{% block javascript %}
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+  <script>
+    function initMap() {
+      var userLocation = new google.maps.LatLng({{ user_location.latitude }}, {{ user_location.longitude }});
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: userLocation,
+        zoom: 10
+      });
+      var providers = {{ providers|safe }};
+      var providersList = document.getElementById('providers-list');
+      for (var i = 0; i < providers.length; i++) {
+        var provider = providers[i];
+        var providerLocation = new google.maps.LatLng(provider.latitude, provider.longitude);
+        var marker = new google.maps.Marker({
+          position: providerLocation,
+          map: map,
+          title: provider.name
+        });
+        var li = document.createElement('li');
+        li.innerHTML = '<h3>' + provider.name + '</h3><p>' + provider.address + '</p><p>' + provider.description + '</p>';
+        providersList.appendChild(li);
+      }
+    }
+  </script>
+{% endblock %}

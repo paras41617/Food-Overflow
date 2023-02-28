@@ -1,5 +1,5 @@
 """
-ASGI config for shine project.
+ASGI config for food_overflow project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
